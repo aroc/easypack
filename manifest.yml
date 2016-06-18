@@ -1,0 +1,21 @@
+tasks:
+
+  - name: main-js
+    what: javascript modules
+    output: ./dist/build.js
+    entry: ./demo-app/js/index.js
+    minify: additionally
+    sourcemaps: true
+
+  - name: main-styles
+    what: css imports
+    output: ./dist/build.css
+    entry: ./demo-app/style/main.css
+    minify: additionally
+  
+  - name: server
+    what: server
+    port: 5000
+    paths:
+      - public
+      - dist
