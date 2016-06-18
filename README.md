@@ -1,1 +1,2 @@
-## The fastest, easiest, most straightforward way to build assets for the web. Powered by Gulp behind the scenes, you can easily plug in your own custom Gulp tasks when more customization needed.
+# Easy Pack
+The fastest, easiest, most straightforward way to build assets for the web. Powered by Gulp behind the scenes, you can easily plug in your own custom Gulp tasks when more customization needed.
