@@ -3,68 +3,61 @@
 const pkg = require('../package.json');
 const gulp = require('gulp');
 const gutil = require('gulp-util');
+const taskMap = require('./taskMap.js');
 
-let taskMap = {
-  // JS Tasks
-  "javascript modules":           require('./tasks/javascript/modules.js'),
-  "minify javascript file":       require('./tasks/javascript/minify.js'),
-  
-  // CSS Tasks
-  "css imports":                  require('./tasks/css/imports.js'),
-  "minify css file":              require('./tasks/css/minify.js'),
-
-  // Utils
-  "server":                       require('./tasks/utils/server.js'),
-
-  // General Tasks
-  "concatenate":                  require('./tasks/common/concatenate.js')
-};
-let taskNames = [];
-let manifest = require('../manifest.json');
-
-for (let i=0; i < manifest.tasks.length; i++) {
-  let details = manifest.tasks[i];
-  let dependencies = [];
-  taskNames.push(details.name);
-
-  if (details.depends_on) {
-    dependencies = (details.depends_on.constructor === Array) ? details.depends_on : [details.depends_on];
+function EasyPack(manifest) {
+  if (this instanceof EasyPack === false) {
+    return new EasyPack(manifest);
   }
+  this.manifest = manifest;
+  this.taskMap = taskMap;
+  this.taskNames = [];
 
-  // Define the Gulp taks
-  gulp.task(details.name, dependencies, taskMap[details.what](details));
+  for (let i=0; i < this.manifest.tasks.length; i++) {
+    let details = this.manifest.tasks[i];
+    let dependencies = [];
+    this.taskNames.push(details.name);
 
-  // Add minification task if required
-  if (details.minify_after === true) createMinificationTask(details);
+    if (details.depends_on) {
+      dependencies = (details.depends_on.constructor === Array) ? details.depends_on : [details.depends_on];
+    }
 
-  if (details.watch_for_changes) createWatchTask(details);
+    // Define the Gulp taks
+    gulp.task(details.name, dependencies, this.taskMap[details.what](details));
+
+    // Add minification task if required
+    if (details.minify_after === true) this.createMinificationTask(details);
+
+    if (details.watch_for_changes) this.createWatchTask(details);
+  }
+  return this;
 }
 
-// Run gulp!
-gulp.task('default', taskNames);
-gulp.start();
-
-// ***************************
-// Utility functions
-// ***************************
-
-function createMinificationTask (details) {
+EasyPack.prototype.createMinificationTask = function (details) {
   details.input = details.output;
   let taskName = `minify-${details.name}`;
-  taskNames.push(taskName);
+  this.taskNames.push(taskName);
 
   let splitPath = details.output.split('.');
   let fileType = splitPath[splitPath.length-1];
 
   if (fileType === 'js') {
-    gulp.task(taskName, [details.name], taskMap['minify javascript file'](details));
+    gulp.task(taskName, [details.name], this.taskMap['minify javascript file'](details));
   }
   if (fileType === 'css') {
-    gulp.task(taskName, [details.name], taskMap['minify css file'](details));
+    gulp.task(taskName, [details.name], this.taskMap['minify css file'](details));
   }
 }
 
-function createWatchTask (details) {
+EasyPack.prototype.createWatchTask = function (details) {
   let files = (details.watch_for_changes.constructor === Array) ? details.watch_for_changes : [details.watch_for_changes]
   gulp.watch(files, [details.name]);
 }
+
+EasyPack.prototype.run = function() {
+  // Run gulp!
+  gulp.task('default', this.taskNames);
+  gulp.start();
+};
+
+module.exports = EasyPack;

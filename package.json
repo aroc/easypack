@@ -14,7 +14,7 @@
     "url": "https://github.com/aroc/easy-pack/issues"
   },
   "scripts": {
-    "dev": "node src/index.js"
+    "dev": "node example.js"
   },
   "dependencies": {
     "babel-preset-es2015": "^6.3.13",

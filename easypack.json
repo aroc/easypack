@@ -17,7 +17,8 @@
         "./demo-app/js/without_modules/index.js"
       ],
       "minify_after": true,
-      "watch_for_changes":  "./demo-app/js/without_modules/**/*.js"
+      "watch_for_changes":  "./demo-app/js/without_modules/**/*.js",
+      "depends_on": "js-modules"
     },
     {
       "name": "styles-with-import",
