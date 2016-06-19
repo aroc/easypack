@@ -6,9 +6,7 @@
       "output": "./dist/build.js",
       "entry": "./demo-app/js/with_modules/index.js",
       "minify_after": true,
-      "watch_for_changes":  [
-        "./demo-app/js/with_modules/**/*.js"
-      ]
+      "watch_for_changes":  "./demo-app/js/with_modules/**/*.js"
     },
     {
       "name": "js-concatenate",
@@ -18,14 +16,16 @@
         "./demo-app/js/without_modules/user.js",
         "./demo-app/js/without_modules/index.js"
       ],
-      "minify_after": true
+      "minify_after": true,
+      "watch_for_changes":  "./demo-app/js/without_modules/**/*.js"
     },
     {
       "name": "styles-with-import",
       "what": "css imports",
       "output": "./dist/build.css",
       "entry": "./demo-app/style/with_imports/main.css",
-      "minify_after": true
+      "minify_after": true,
+      "watch_for_changes":  "./demo-app/js/with_imports/**/*.css"
     },
     {
       "name": "styles-concatenate",
@@ -34,7 +34,8 @@
       "files": [
         "./demo-app/style/without_imports/*.css"
       ],
-      "minify_after": true
+      "minify_after": true,
+      "watch_for_changes":  "./demo-app/js/without_imports/**/*.css"
     },
     {
       "name": "server",
