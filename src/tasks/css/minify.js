@@ -3,7 +3,6 @@
 const gulp = require('gulp');
 const minifyCSS = require('gulp-minify-css');
 const rename = require('gulp-rename');
-
 const Utils = require('../../utils/index.js');
 
 module.exports = function (details) {
