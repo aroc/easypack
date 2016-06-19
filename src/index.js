@@ -13,8 +13,8 @@ let taskMap = {
   "css imports":                  require('./tasks/css/imports.js'),
   "minify css file":              require('./tasks/css/minify.js'),
 
-  // Server Tasks
-  "server":                       require('./tasks/javascript/server.js'),
+  // Utils
+  "server":                       require('./tasks/utils/server.js'),
 
   // General Tasks
   "concatenate":                  require('./tasks/common/concatenate.js')
@@ -24,13 +24,20 @@ let manifest = require('../manifest.json');
 
 for (let i=0; i < manifest.tasks.length; i++) {
   let details = manifest.tasks[i];
+  let dependencies = [];
   taskNames.push(details.name);
 
+  if (details.depends_on) {
+    dependencies = (details.depends_on.constructor === Array) ? details.depends_on : [details.depends_on];
+  }
+
   // Define the Gulp taks
-  gulp.task(details.name, taskMap[details.what](details));
+  gulp.task(details.name, dependencies, taskMap[details.what](details));
 
   // Add minification task if required
-  if (details.minify_after) createMinificationTask(details);
+  if (details.minify_after === true) createMinificationTask(details);
+
+  if (details.watch_for_changes) createWatchTask(details);
 }
 
 // Run gulp!
@@ -55,4 +62,9 @@ function createMinificationTask (details) {
   if (fileType === 'css') {
     gulp.task(taskName, [details.name], taskMap['minify css file'](details));
   }
+}
+
+function createWatchTask (details) {
+  let files = (details.watch_for_changes.constructor === Array) ? details.watch_for_changes : [details.watch_for_changes]
+  gulp.watch(files, [details.name]);
 }
