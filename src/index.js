@@ -36,10 +36,10 @@ for (let i=0; i < manifest.tasks.length; i++) {
     let taskName = `minify-${details.name}`;
     taskNames.push(taskName);
 
-    if (details.name.indexOf('javascript')) {
+    if (details.what.indexOf('javascript') > -1) {
       gulp.task(taskName, [details.name], taskMap['minify javascript file'](details));
     }
-    else if (details.name.indexOf('css')) {
+    else if (details.what.indexOf('css') > -1) {
       gulp.task(taskName, [details.name], taskMap['minify css file'](details));
     }
   }
