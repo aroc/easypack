@@ -10,9 +10,16 @@ const gulp = require('gulp');
 const gutil = require('gulp-util');
 
 let taskMap = {
-  "javascript modules": require('./tasks/javascript/modules.js'),
-  "server":             require('./tasks/javascript/server.js'),
-  "css imports":        require('./tasks/css/imports.js')
+  // JS Tasks
+  "javascript modules":           require('./tasks/javascript/modules.js'),
+  "minify javascript file":        require('./tasks/javascript/minify.js'),
+  
+  // CSS Tasks
+  "css imports":                  require('./tasks/css/imports.js'),
+  "minify css file":              require('./tasks/css/minify.js'),
+
+  // Server Tasks
+  "server":                       require('./tasks/javascript/server.js'),
 };
 let taskNames = [];
 let manifest = require('../manifest.json');
@@ -23,6 +30,19 @@ for (let i=0; i < manifest.tasks.length; i++) {
 
   // Define the Gulp taks
   gulp.task(details.name, taskMap[details.what](details));
+
+  if (details.minify_after) {
+    details.input = details.output;
+    let taskName = `minify-${details.name}`;
+    taskNames.push(taskName);
+
+    if (details.name.indexOf('javascript')) {
+      gulp.task(taskName, [details.name], taskMap['minify javascript file'](details));
+    }
+    else if (details.name.indexOf('css')) {
+      gulp.task(taskName, [details.name], taskMap['minify css file'](details));
+    }
+  }
 }
 
 // Run gulp!

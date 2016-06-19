@@ -5,14 +5,14 @@
       "what": "javascript modules",
       "output": "./dist/build.js",
       "entry": "./demo-app/js/index.js",
-      "minify": "additionally"
+      "minify_after": true
     },
     {
       "name": "main-styles",
       "what": "css imports",
       "output": "./dist/build.css",
       "entry": "./demo-app/style/main.css",
-      "minify": "additionally"
+      "minify_after": true
     },
     {
       "name": "server",
