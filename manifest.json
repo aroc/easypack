@@ -5,7 +5,10 @@
       "what": "javascript modules",
       "output": "./dist/build.js",
       "entry": "./demo-app/js/with_modules/index.js",
-      "minify_after": true
+      "minify_after": true,
+      "watch_for_changes":  [
+        "./demo-app/js/with_modules/**/*.js"
+      ]
     },
     {
       "name": "js-concatenate",
