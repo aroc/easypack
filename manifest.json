@@ -1,17 +1,36 @@
 {
   "tasks": [
     {
-      "name": "main-js",
+      "name": "js-modules",
       "what": "javascript modules",
       "output": "./dist/build.js",
       "entry": "./demo-app/js/index.js",
       "minify_after": true
     },
     {
-      "name": "main-styles",
+      "name": "js-concatenate",
+      "what": "concatenate",
+      "output": "./dist/concatenated.js",
+      "files": [
+        "./demo-app/js/user.js",
+        "./demo-app/js/index.js"
+      ],
+      "minify_after": true
+    },
+    {
+      "name": "styles-with-import",
       "what": "css imports",
       "output": "./dist/build.css",
       "entry": "./demo-app/style/main.css",
+      "minify_after": true
+    },
+    {
+      "name": "styles-concatenate",
+      "what": "concatenate",
+      "output": "./dist/concatenated.css",
+      "files": [
+        "./demo-app/style/**/*.css"
+      ],
       "minify_after": true
     },
     {
