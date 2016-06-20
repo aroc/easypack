@@ -26,7 +26,14 @@ function EasyPack(manifest) {
     }
 
     // Define the Gulp taks
-    gulp.task(details.name, dependencies, this.taskMap[details.what](details));
+    let task = null;
+    if (this.taskMap[details.what]) {
+      task = this.taskMap[details.what](details);
+    }
+    else {
+      task = require(`../easypack-tasks/${details.what}.js`)(details);
+    }
+    gulp.task(details.name, dependencies, task);
 
     // Add minification task if required
     if (details.minify_after === true) this.createMinificationTask(details);
@@ -56,7 +63,6 @@ EasyPack.prototype.createWatchTask = function (details) {
 }
 
 EasyPack.prototype.run = function() {
-  // Run gulp!
   gulp.task('default', this.taskNames);
   gulp.start();
 };

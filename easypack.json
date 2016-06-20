@@ -42,6 +42,14 @@
       "name": "server",
       "what": "server",
       "paths": ["public", "dist"]
+    },
+    {
+      "name": "linter",
+      "what": "javascript/flowtype-linter",
+      "files": [
+        "./demo-app/**/*.js"
+      ],
+      "watch_for_changes": "./demo-app/**/*.js"
     }
   ]
 }
