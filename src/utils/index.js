@@ -9,6 +9,11 @@ module.exports = {
     pathSplit.pop();
     result.dir = pathSplit.join('/');
     return result;
+  },
+
+  getFileType: function (path) {
+    let splitPath = path.split('.');
+    return splitPath[splitPath.length-1];
   }
 
 };

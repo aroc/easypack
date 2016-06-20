@@ -3,7 +3,9 @@
 const pkg = require('../package.json');
 const gulp = require('gulp');
 const gutil = require('gulp-util');
+const Utils = require('./utils/index.js');
 const taskMap = require('./taskMap.js');
+const ENV = process.env.NODE_ENV || 'development';
 
 function EasyPack(manifest) {
   if (this instanceof EasyPack === false) {
@@ -15,6 +17,7 @@ function EasyPack(manifest) {
 
   for (let i=0; i < this.manifest.tasks.length; i++) {
     let details = this.manifest.tasks[i];
+    details.env = ENV;
     let dependencies = [];
     this.taskNames.push(details.name);
 
@@ -37,9 +40,7 @@ EasyPack.prototype.createMinificationTask = function (details) {
   details.input = details.output;
   let taskName = `minify-${details.name}`;
   this.taskNames.push(taskName);
-
-  let splitPath = details.output.split('.');
-  let fileType = splitPath[splitPath.length-1];
+  let fileType = Utils.getFileType(details.output);
 
   if (fileType === 'js') {
     gulp.task(taskName, [details.name], this.taskMap['minify javascript file'](details));
