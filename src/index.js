@@ -1,11 +1,13 @@
 'use strict'
 
-const pkg = require('../package.json');
+const path = require('path');
+var easypackPath = path.resolve(__dirname + '/../../../');
 const gulp = require('gulp');
 const gutil = require('gulp-util');
 const Utils = require('./utils/index.js');
 const taskMap = require('./taskMap.js');
 const ENV = process.env.NODE_ENV || 'development';
+const pkg = require(path.resolve(easypackPath + '/package.json'));
 
 function EasyPack(manifest) {
   if (this instanceof EasyPack === false) {
