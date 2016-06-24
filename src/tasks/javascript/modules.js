@@ -9,7 +9,7 @@ const babelify = require('babelify');
 const source = require('vinyl-source-stream');
 const sourcemaps = require('gulp-sourcemaps');
 
-const Utils = require('../../utils/index.js');
+const Utils = require('../../utils.js');
 
 const babelConfig = {
   "presets": [

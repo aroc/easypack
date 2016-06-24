@@ -9,7 +9,7 @@ const postcss_cssnext = require('postcss-cssnext');
 const postcss_import = require('postcss-import');
 const postcss_reporter = require('postcss-reporter');
 
-const Utils = require('../../utils/index.js');
+const Utils = require('../../utils.js');
 
 module.exports = function (details) {
   let outputs = Utils.parseOutput(details.output);

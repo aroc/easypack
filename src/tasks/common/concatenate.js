@@ -5,7 +5,7 @@ const gulpif = require('gulp-if');
 const gutil = require('gulp-util');
 const sourcemaps = require('gulp-sourcemaps');
 const concat = require('gulp-concat');
-const Utils = require('../../utils/index.js');
+const Utils = require('../../utils.js');
 
 module.exports = function (details) {
   let outputs = Utils.parseOutput(details.output);
