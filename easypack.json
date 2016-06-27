@@ -2,14 +2,14 @@
   "tasks": [
     {
       "name": "js-modules",
-      "what": "javascript modules",
+      "what": "javascript-modules",
       "output": "./dist/build.js",
       "entry": "./demo-app/js/with_modules/index.js",
       "minify_after": true,
       "watch_for_changes":  "./demo-app/js/with_modules/**/*.js"
     },
     {
-      "name": "js-concatenate",
+      "name": "javascript-concatenate",
       "what": "concatenate",
       "output": "./dist/concatenated.js",
       "files": [
@@ -22,7 +22,7 @@
     },
     {
       "name": "styles-with-import",
-      "what": "css imports",
+      "what": "css-imports",
       "output": "./dist/build.css",
       "entry": "./demo-app/style/with_imports/main.css",
       "minify_after": true,
