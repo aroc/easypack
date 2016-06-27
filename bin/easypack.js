@@ -5,11 +5,12 @@ var path = require('path');
 var Utils = require('../src/utils.js');
 var rootPath;
 if (__dirname.match('node_modules') !== null) {
-  rootPath = path.resolve('./../../../');
+  rootPath = path.resolve(__dirname, './../../../');
 } else {
-  rootPath = path.resolve('./');
+  rootPath = path.resolve(__dirname, './');
 }
 var easypackPath = path.resolve(rootPath, './easypack.json');
+console.log(easypackPath);
 
 fs.stat(easypackPath, function (err, stats) {
   if (err) console.error('No easypack.json file found.');
