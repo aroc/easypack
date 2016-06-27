@@ -7,11 +7,10 @@ const Utils = require('./utils.js');
 const taskMap = require('./taskMap.js');
 const ENV = process.env.NODE_ENV || 'development';
 
-function EasyPack(manifest, rootPath) {
+function EasyPack(manifest) {
   if (this instanceof EasyPack === false) {
     return new EasyPack(manifest);
   }
-  this.rootPath = rootPath;
   this.manifest = manifest;
   this.taskMap = taskMap;
   this.taskNames = [];
@@ -19,7 +18,6 @@ function EasyPack(manifest, rootPath) {
   for (let i=0; i < this.manifest.tasks.length; i++) {
     let details = this.manifest.tasks[i];
     details.env = ENV;
-    details.rootPath = this.rootPath;
     let dependencies = [];
     this.taskNames.push(details.name);
 
