@@ -6,12 +6,12 @@ const gutil = require('gulp-util');
 const Utils = require('./utils.js');
 const taskMap = require('./taskMap.js');
 const ENV = process.env.NODE_ENV || 'development';
-const pkg = require(path.resolve(Utils.getRootPath() + '/package.json'));
 
-function EasyPack(manifest) {
+function EasyPack(manifest, rootPath) {
   if (this instanceof EasyPack === false) {
     return new EasyPack(manifest);
   }
+  this.rootPath = rootPath;
   this.manifest = manifest;
   this.taskMap = taskMap;
   this.taskNames = [];
@@ -19,6 +19,7 @@ function EasyPack(manifest) {
   for (let i=0; i < this.manifest.tasks.length; i++) {
     let details = this.manifest.tasks[i];
     details.env = ENV;
+    details.rootPath = this.rootPath;
     let dependencies = [];
     this.taskNames.push(details.name);
 

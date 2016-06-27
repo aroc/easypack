@@ -3,11 +3,18 @@
 var fs = require('fs');
 var path = require('path');
 var Utils = require('../src/utils.js');
+var rootPath;
+if (__dirname.match('node_modules') !== null) {
+  rootPath = path.resolve('./../../../');
+} else {
+  rootPath = path.resolve('./');
+}
+var easypackPath = path.resolve(rootPath, './easypack.json');
 
-fs.stat('./easypack.json', function (err, stats) {
+fs.stat(easypackPath, function (err, stats) {
   if (err) console.error('No easypack.json file found.');
   if (!err) {
     var EasyPack = require('../src/index.js');
-    EasyPack(require(path.resolve(Utils.getRootPath() + '/easypack.json'))).run();
+    EasyPack(require(easypackPath)).run();
   }
 });

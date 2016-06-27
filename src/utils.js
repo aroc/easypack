@@ -19,12 +19,7 @@ module.exports = {
   },
 
   getRootPath: function () {
-    let executionPath = path.resolve(__dirname, '/../../');
-    let directoryName = executionPath.split('/')[executionPath.split('/').length-1];
-    if (directoryName === 'node_modules') {
-      return path.resolve(__dirname + '/../../../');
-    }
-    return path.resolve(__dirname + '/../');
+    return path.resolve(__dirname + './../../../');
   }
 
 };

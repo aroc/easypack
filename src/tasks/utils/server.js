@@ -7,7 +7,7 @@ var Utils = require('../../utils.js');
 module.exports = function (details) {
   return function () {
     return connect.server({
-      root: details.paths.map(p => path.resolve(Utils.getRootPath() + '/' + p)),
+      root: details.paths.map(p => path.resolve(details.rootPath + '/' + p)),
       port: details.port || 8080
     });
   }
