@@ -19,20 +19,22 @@ const babelConfig = {
 };
 
 module.exports = function (details) {
+  gutil.log(`Starting ${details.name}...`);
   let outputs = Utils.parseOutput(details.output);
 
   return function () {
     return browserify({
-        entries: details.entry,
-        debug: details.debug
-      })
-      .transform('babelify', babelConfig)
-      .bundle()
-      .on('error', gutil.log)
-      .pipe(source(outputs.filename))
-      .pipe(buffer())
-      .pipe(gulpif(details.env === 'development', sourcemaps.init()))
-      .pipe(gulpif(details.env === 'development', sourcemaps.write()))
-      .pipe(gulp.dest(outputs.dir));
+      entries: details.entry,
+      debug: details.debug
+    })
+    .transform('babelify', babelConfig)
+    .bundle()
+    .on('error', gutil.log)
+    .pipe(source(outputs.filename))
+    .pipe(buffer())
+    .pipe(gulpif(details.env === 'development', sourcemaps.init()))
+    .pipe(gulpif(details.env === 'development', sourcemaps.write()))
+    .on('finish', function(){ gutil.log(`Finished ${details.name}`) })
+    .pipe(gulp.dest(outputs.dir));
   }
 };

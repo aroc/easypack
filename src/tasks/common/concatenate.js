@@ -8,6 +8,7 @@ const concat = require('gulp-concat');
 const Utils = require('../../utils.js');
 
 module.exports = function (details) {
+  gutil.log(`Starting ${details.name}...`);
   let outputs = Utils.parseOutput(details.output);
 
   return function () {
@@ -15,6 +16,7 @@ module.exports = function (details) {
       .pipe(gulpif(details.env === 'development', sourcemaps.init()))
       .pipe(concat(outputs.filename))
       .pipe(gulpif(details.env === 'development', sourcemaps.write()))
+      .on('finish', function(){ gutil.log(`Finished ${details.name}`) })
       .pipe(gulp.dest(outputs.dir));
   }
 };
