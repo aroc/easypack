@@ -16,10 +16,6 @@ module.exports = {
   getFileType: function (path) {
     let splitPath = path.split('.');
     return splitPath[splitPath.length-1];
-  },
-
-  getRootPath: function () {
-    return path.resolve(__dirname + './../../../');
   }
 
 };
