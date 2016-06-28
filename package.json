@@ -14,7 +14,7 @@
     "url": "https://github.com/aroc/easy-pack/issues"
   },
   "scripts": {
-    "dev": "easypack"
+    "dev": "node bin/easypack.js"
   },
   "bin": {
     "easypack": "bin/easypack.js"

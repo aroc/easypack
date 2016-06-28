@@ -7,10 +7,9 @@ var rootPath;
 if (__dirname.match('node_modules') !== null) {
   rootPath = path.resolve(__dirname, './../../../');
 } else {
-  rootPath = path.resolve(__dirname, './');
+  rootPath = path.resolve(__dirname, '../');
 }
 var easypackPath = path.resolve(rootPath, './easypack.json');
-console.log(easypackPath);
 
 fs.stat(easypackPath, function (err, stats) {
   if (err) console.error('No easypack.json file found.');
