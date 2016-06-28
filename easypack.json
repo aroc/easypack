@@ -44,13 +44,11 @@
     },
     {
       "name": "less-styles",
-      "what": "concatenate",
-      "output": "./dist/concatenated.css",
-      "files": [
-        "./demo-app/style/concatenated/*.css"
-      ],
+      "what": "css-less",
+      "output": "./dist/less.css",
+      "entry": "./demo-app/style/less/main.less",
       "minify_after": true,
-      "watch_for_changes":  "./demo-app/js/concatenated/**/*.css"
+      "watch_for_changes":  "./demo-app/js/less/**/*.css"
     },
     {
       "name": "server",
