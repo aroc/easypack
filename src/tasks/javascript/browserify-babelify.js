@@ -21,7 +21,8 @@ module.exports = function (details) {
       debug: details.env === 'development' ? true : false
     })
     .transform('babelify', {
-      presets: details.babel_presets
+      presets: details.babel_presets || [],
+      plugins: details.babel_plugins || []
     })
     .bundle()
     .on('error', gutil.log)

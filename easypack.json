@@ -10,6 +10,7 @@
         "es2015",
         "react"
       ],
+      "babel_plugins": ["transform-class-properties"],
       "watch_for_changes":  "./demo-app/js/with_modules/**/*.js"
     },
     {

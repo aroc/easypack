@@ -20,10 +20,11 @@
     "easypack": "bin/easypack.js"
   },
   "dependencies": {
+    "babel": "^6.5.2",
     "babel-eslint": "^6.0.4",
+    "babel-plugin-transform-class-properties": "^6.10.2",
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
-    "babel": "^6.5.2",
     "babelify": "^7.3.0",
     "browserify": "^13.0.1",
     "callsite": "^1.0.0",
