@@ -17,7 +17,7 @@
     "dev": "easypack"
   },
   "bin": {
-    "easypack": "./bin/easypack.js"
+    "easypack": "bin/easypack.js"
   },
   "dependencies": {
     "babel-eslint": "^6.0.4",
