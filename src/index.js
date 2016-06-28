@@ -50,10 +50,10 @@ EasyPack.prototype.createMinificationTask = function (details) {
   let fileType = Utils.getFileType(details.output);
 
   if (fileType === 'js') {
-    gulp.task(taskName, [details.name], this.taskMap['minify javascript file'](details));
+    gulp.task(taskName, [details.name], this.taskMap['js-minify'](details));
   }
   if (fileType === 'css') {
-    gulp.task(taskName, [details.name], this.taskMap['minify css file'](details));
+    gulp.task(taskName, [details.name], this.taskMap['css-minify'](details));
   }
 }
 

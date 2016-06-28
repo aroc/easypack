@@ -1,15 +1,15 @@
 {
   "tasks": [
     {
-      "name": "js-modules",
-      "what": "javascript-modules",
+      "name": "browserified-js",
+      "what": "js-browserify",
       "output": "./dist/build.js",
       "entry": "./demo-app/js/with_modules/index.js",
       "minify_after": true,
       "watch_for_changes":  "./demo-app/js/with_modules/**/*.js"
     },
     {
-      "name": "javascript-concatenate",
+      "name": "concatenated-javascript",
       "what": "concatenate",
       "output": "./dist/concatenated.js",
       "files": [
@@ -21,22 +21,32 @@
       "depends_on": "js-modules"
     },
     {
-      "name": "styles-with-import",
-      "what": "css-imports",
+      "name": "postcss-styles",
+      "what": "css-postcss",
       "output": "./dist/build.css",
-      "entry": "./demo-app/style/with_imports/main.css",
+      "entry": "./demo-app/style/postcss/main.css",
       "minify_after": true,
-      "watch_for_changes":  "./demo-app/js/with_imports/**/*.css"
+      "watch_for_changes":  "./demo-app/js/postcss/**/*.css"
     },
     {
-      "name": "styles-concatenate",
+      "name": "concatenated-styles",
       "what": "concatenate",
       "output": "./dist/concatenated.css",
       "files": [
-        "./demo-app/style/without_imports/*.css"
+        "./demo-app/style/concatenated/*.css"
       ],
       "minify_after": true,
-      "watch_for_changes":  "./demo-app/js/without_imports/**/*.css"
+      "watch_for_changes":  "./demo-app/js/concatenated/**/*.css"
+    },
+    {
+      "name": "less-styles",
+      "what": "concatenate",
+      "output": "./dist/concatenated.css",
+      "files": [
+        "./demo-app/style/concatenated/*.css"
+      ],
+      "minify_after": true,
+      "watch_for_changes":  "./demo-app/js/concatenated/**/*.css"
     },
     {
       "name": "server",
