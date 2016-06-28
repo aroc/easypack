@@ -48,11 +48,5 @@
     "reactify": "^1.1.1",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
-  },
-  "babel": {
-    "presets": [
-      "es2015",
-      "react"
-    ]
   }
 }

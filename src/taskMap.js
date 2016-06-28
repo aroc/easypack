@@ -1,6 +1,6 @@
 module.exports = {
   // JS Tasks
-  "js-browserify":                require('./tasks/javascript/modules.js'),
+  "js-browserify-babelify":       require('./tasks/javascript/browserify-babelify.js'),
   "js-minify":                    require('./tasks/javascript/minify.js'),
   // CSS Tasks
   "css-postcss":                  require('./tasks/css/postcss.js'),

@@ -11,13 +11,6 @@ const sourcemaps = require('gulp-sourcemaps');
 
 const Utils = require('../../utils.js');
 
-const babelConfig = {
-  "presets": [
-    "es2015",
-    "react"
-  ]
-};
-
 module.exports = function (details) {
   gutil.log(`Starting ${details.name}...`);
   let outputs = Utils.parseOutput(details.output);
@@ -25,9 +18,11 @@ module.exports = function (details) {
   return function () {
     return browserify({
       entries: details.entry,
-      debug: details.debug
+      debug: details.env === 'development' ? true : false
     })
-    .transform('babelify', babelConfig)
+    .transform('babelify', {
+      presets: details.babel_presets
+    })
     .bundle()
     .on('error', gutil.log)
     .pipe(source(outputs.filename))
