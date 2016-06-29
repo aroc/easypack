@@ -56,38 +56,38 @@ The following example `easypack.json` file has 2 tasks:
 ## The structure of an EasyPack task
 EasyPack tasks are structured in JSON objects where each key is some meaningful config option for that task. The options are:
 
-### "name": "{TASK_NAME}"
+#### "name": "{TASK_NAME}"
 The name of your task. This name is used for two purposes:
 1. To log to the terminal when the task is starting and has finished.
 2. Used in the `depends_on` key in other tasks to handle running dependent tasks.
 
-### "what": "{TASK_TO_BE_RUN}"
+#### "what": "{TASK_TO_BE_RUN}"
 The "what" key defines the name of the task to be run. If it's one of the default EasyPack tasks below, then it runs that task. If EasyPack doesn't find a task with the value in this key then it tries to run a custom task. Custom tasks are fund in `{YOUR_PROJECT_ROOT}/easypack-tasks/{PATH_TO_TASK_WITH_JS_EXTENSION}`. How to build custom tasks are explained in this readme, here.
 
-### "output": "{PATH_TO_FILE}"
+#### "output": "{PATH_TO_FILE}"
 The path to the file that will be created from this task. Be sure to include the path, filename and extension. For example, `./build/js/build.js`.
 
-### "entry": "{ENTRY_FILE_FOR_BUILD_TASK}"
+#### "entry": "{ENTRY_FILE_FOR_BUILD_TASK}"
 The entry file for the given task if it requires it.
 
-### "minify_after": {TRUE or FALSE} - OPTIONAL
+#### "minify_after": {TRUE or FALSE} - OPTIONAL
 Whether or not to create an additional minified version of the output file after the task is run. The file is placed in the same spot as the file in `output` You can also omit this key if you don't want a minified version.
 
-### "watch_for_changes": {ARRAY OF PATHS OR SINGLE PATH}
+#### "watch_for_changes": {ARRAY OF PATHS OR SINGLE PATH}
 An array of strings or a single string representing the paths to watch for file changes. If any of these files change, this task is re-run. You can also use wildcard paths here. For example: `"watch_for_changes": "./client/js/**/*"`
 
-### "depends_on": {ARRAY OF TASK NAMES} - OPTIONAL
+#### "depends_on": {ARRAY OF TASK NAMES} - OPTIONAL
 An array of strings representing the names of tasks to be run before this task is run.
 
-### "files": {ARRAY OF FILES}
+#### "files": {ARRAY OF FILES}
 For tasks like `concatenate`, instead of `entry` the task requires an array of files to concatenate together.
 
-### "paths": {ARRAY OF PATHS}
+#### "paths": {ARRAY OF PATHS}
 Paths to be use dby the task, like the `server` task which fires up a server and serves the directories supplied in this key.
 
 ## EasyPack default tasks and supported options
 
-### "what": "js-browserify-babelify"
+#### "what": "js-browserify-babelify"
 Runs browserify and babelify with the path to the entry file supplied by the `entry` key. You can specify what babel presets and plugins to run with the keys `babel_plugins` and `babel_presets`. Example task:
 
 ```json
@@ -106,7 +106,7 @@ Runs browserify and babelify with the path to the entry file supplied by the `en
 }
 ```
 
-### "what": "concatenate"
+#### "what": "concatenate"
 Concatenates the files specified by the `files` key together. Example task:
 ```json
 {
@@ -120,7 +120,7 @@ Concatenates the files specified by the `files` key together. Example task:
 }
 ```
 
-### "what": "css-postcss"
+#### "what": "css-postcss"
 Builds a single CSS file starting at the file specified by the `entry` key. Follows `@import` statements to add the other files. Runs `postcss` on these files to ensure CSS features not fully supported by all browsers are polyfilled. Example task:
 ```json
 {
@@ -133,7 +133,7 @@ Builds a single CSS file starting at the file specified by the `entry` key. Foll
 }
 ```
 
-### "what": "css-less"
+#### "what": "css-less"
 Builds a single CSS file with the LESS CSS preprocessor, starting at the file specified by the `entry` key. Example task:
 ```json
 {
@@ -146,7 +146,7 @@ Builds a single CSS file with the LESS CSS preprocessor, starting at the file sp
 }
 ```
 
-### "what": "server"
+#### "what": "server"
 Runs a server, serving the directories supplied by the `paths` key. Runs by default on port `8080`, but you can configure which port to run it on with the `port` key. Example task:
 ```json
 {
