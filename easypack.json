@@ -31,7 +31,7 @@
       "output": "./dist/build.css",
       "entry": "./demo-app/style/postcss/main.css",
       "minify_after": true,
-      "watch_for_changes":  "./demo-app/js/postcss/**/*.css"
+      "watch_for_changes":  "./demo-app/style/postcss/**/*.css"
     },
     {
       "name": "concatenated-styles",
@@ -41,7 +41,7 @@
         "./demo-app/style/concatenated/*.css"
       ],
       "minify_after": true,
-      "watch_for_changes":  "./demo-app/js/concatenated/**/*.css"
+      "watch_for_changes":  "./demo-app/style/concatenated/**/*.css"
     },
     {
       "name": "less-styles",
@@ -49,7 +49,7 @@
       "output": "./dist/less.css",
       "entry": "./demo-app/style/less/main.less",
       "minify_after": true,
-      "watch_for_changes":  "./demo-app/js/less/**/*.css"
+      "watch_for_changes":  "./demo-app/style/less/**/*.css"
     },
     {
       "name": "server",
