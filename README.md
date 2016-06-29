@@ -156,7 +156,7 @@ Runs a server, serving the directories supplied by the `paths` key. Runs by defa
 }
 ```
 
-### How to build EasyPack custom tasks
+## How to build EasyPack custom tasks
 To have EasyPack run a custom task, just set the `what` key to the path of the task. EasyPack looks for custom tasks in the `easypack-tasks` directory by default, so to have EasyPack run your task in the `linter.js` file in the `javascript` directory, you would write: `"what": "javascript/linter.js"`.
 
 EasyPack uses [Gulp](gulpjs.com) under the hood, so you're essentially writing a Gulp task. However, the difference is that the Gulp task is wrapped so that you can pass any values you want to it by defining them in your `easypack.json` file.
