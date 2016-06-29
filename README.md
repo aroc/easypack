@@ -62,7 +62,7 @@ The name of your task. This name is used for two purposes:
 2. Used in the `depends_on` key in other tasks to handle running dependent tasks.
 
 #### "what": "{TASK_TO_BE_RUN}"
-The "what" key defines the name of the task to be run. If it's one of the default EasyPack tasks below, then it runs that task. If EasyPack doesn't find a task with the value in this key then it tries to run a custom task. Custom tasks are fund in `{YOUR_PROJECT_ROOT}/easypack-tasks/{PATH_TO_TASK_WITH_JS_EXTENSION}`. How to build custom tasks are explained in this readme, here.
+The "what" key defines the name of the task to be run. If it's one of the default EasyPack tasks below, then it runs that task. If EasyPack doesn't find a task with the value in this key then it tries to run a custom task. Custom tasks are fund in `{YOUR_PROJECT_ROOT}/easypack-tasks/{PATH_TO_TASK_WITH_JS_EXTENSION}`. [How to build custom tasks are explained in this readme here.](#how-to-build-easypack-custom-tasks)
 
 #### "output": "{PATH_TO_FILE}"
 The path to the file that will be created from this task. Be sure to include the path, filename and extension. For example, `./build/js/build.js`.
@@ -154,4 +154,32 @@ Runs a server, serving the directories supplied by the `paths` key. Runs by defa
   "what": "server",
   "paths": ["public", "dist"]
 }
+```
+
+### How to build EasyPack custom tasks
+To have EasyPack run a custom task, just set the `what` key to the path of the task. EasyPack looks for custom tasks in the `easypack-tasks` directory by default, so to have EasyPack run your task in the `linter.js` file in the `javascript` directory, you would write: `"what": "javascript/linter.js"`.
+
+EasyPack uses [Gulp](gulpjs.com) under the hood, so you're essentially writing a Gulp task. However, the difference is that the Gulp task is wrapped so that you can pass any values you want to it by defining them in your `easypack.json` file.
+
+The function you export is passed the `details` argument which is an object containing all the keys you specified. It also adds the `env` key which is the `NODE_ENV` environment variable.
+
+For example, here is the `server.js` default task that EasyPack comes with:
+```js
+'use strict';
+
+const path = require('path');
+const gutil = require('gulp-util');
+const connect = require('gulp-connect');
+var Utils = require('../../utils.js');
+
+module.exports = function (details) { 
+  gutil.log(`Starting ${details.name}...`);
+  
+  return function () {
+    return connect.server({
+      root: details.paths.map(p => path.resolve(p)),
+      port: details.port || 8080
+    });
+  }
+};
 ```
