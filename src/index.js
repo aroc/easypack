@@ -44,16 +44,17 @@ function EasyPack(manifest) {
 }
 
 EasyPack.prototype.createMinificationTask = function (details) {
+  let dependencyName = details.name;
   details.input = details.output;
-  let taskName = `minify-${details.name}`;
-  this.taskNames.push(taskName);
+  details.name = `minify-${details.name}`;
+  this.taskNames.push(details.name);
   let fileType = Utils.getFileType(details.output);
 
   if (fileType === 'js') {
-    gulp.task(taskName, [details.name], this.taskMap['js-minify'](details));
+    gulp.task(details.name, [dependencyName], this.taskMap['js-minify'](details));
   }
   if (fileType === 'css') {
-    gulp.task(taskName, [details.name], this.taskMap['css-minify'](details));
+    gulp.task(details.name, [dependencyName], this.taskMap['css-minify'](details));
   }
 }
 
